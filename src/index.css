@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+html,
+body {
+  background-color: #000000;
+  color: #ffffff;
+  overscroll-behavior-y: none;
+}
+
+::selection {
+  background: #e8b54a;
+  color: #000000;
+}
+
+/* ----------------------------------------------------------------
+   Arrow button hover — flies the current arrow out to the right
+   while a duplicate arrow flies in from the left to replace it.
+   ---------------------------------------------------------------- */
+@keyframes flyOutRight {
+  from {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(250%);
+    opacity: 0;
+  }
+}
+
+@keyframes flyInLeft {
+  from {
+    transform: translateX(-250%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+
+.group:hover .arrow-out {
+  animation: flyOutRight 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.group:hover .arrow-in {
+  animation: flyInLeft 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* ----------------------------------------------------------------
+   Nav text hover — vertical fly: current label flies up and out,
+   duplicate label flies up and in from below.
+   ---------------------------------------------------------------- */
+@keyframes flyOutUp {
+  from {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-150%);
+    opacity: 0;
+  }
+}
+
+@keyframes flyInUp {
+  from {
+    transform: translateY(150%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+.nav-hover:hover .nav-out {
+  animation: flyOutUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.nav-hover:hover .nav-in {
+  animation: flyInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Respect reduced-motion preferences across the custom keyframes above. */
+@media (prefers-reduced-motion: reduce) {
+  .group:hover .arrow-out,
+  .group:hover .arrow-in,
+  .nav-hover:hover .nav-out,
+  .nav-hover:hover .nav-in {
+    animation: none !important;
+  }
+}
